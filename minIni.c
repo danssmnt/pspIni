@@ -45,7 +45,7 @@ enum quote_option {
 };
 
 /* Mimic fgets behavior with PSPSDK functions
- * Returns the equivalent to fgets
+ * Returns the equivalent to: fgets(...) != NULL
  * Thx go to Freakler for his code: https://github.com/Freakler/CheatDeviceRemastered/blob/d537e30f6fb927cc873e5756c7a4afe07c267c93/source/minIni.c#L96
  */
 SceBool psp_read_fgets(char *s, SceSize n, INI_FILETYPE *stream)
@@ -66,6 +66,7 @@ SceBool psp_read_fgets(char *s, SceSize n, INI_FILETYPE *stream)
 
   s[i] = '\0';
 
+  /* If string goes beyond newline, seek back */
   if (bytes_read > i)
     sceIoLseek32(*stream, -(bytes_read - i), PSP_SEEK_CUR);
 
@@ -850,7 +851,7 @@ SceBool ini_puts(const char *Section, const char *Key, const char *Value, const 
 SceBool ini_puti(const char *Section, const char *Key, SceInt32 Value, const char *Filename)
 {
   char LocalBuffer[32];
-  ini_atoi(LocalBuffer, sizeof(LocalBuffer), Value);
+  ini_itoa(LocalBuffer, sizeof(LocalBuffer), Value);
   return ini_puts(Section, Key, LocalBuffer, Filename);
 }
 

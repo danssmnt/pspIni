@@ -24,6 +24,9 @@
 /* Make it Read-Only if needed */
 /* #define INI_READONLY */
 
+/* No Browser */
+/* #define INI_NOBROWSE */
+
 #include <psptypes.h>
 #include <string.h>
 #include "minGlue.h"

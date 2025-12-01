@@ -20,7 +20,7 @@
 #define INI_FILETYPE                    SceUID
 
 /* Mimic fgets behavior with PSPSDK functions
- * Returns the equivalent to fgets
+ * Returns the equivalent to: fgets(...) != NULL
  * Thx go to Freakler for his code: https://github.com/Freakler/CheatDeviceRemastered/blob/d537e30f6fb927cc873e5756c7a4afe07c267c93/source/minIni.c#L96
  */
 extern SceBool psp_read_fgets(char *s, SceSize n, INI_FILETYPE *stream);
@@ -38,6 +38,6 @@ extern SceBool psp_read_fgets(char *s, SceSize n, INI_FILETYPE *stream);
 #define ini_tell(file,pos)              ((*(pos) = sceIoLseek32(*(file), 0, PSP_SEEK_CUR)) >= 0)
 #define ini_seek(file,pos)              ((*(pos) = sceIoLseek32(*(file), *(pos), PSP_SEEK_SET)) >= 0)
 
-#define ini_atoi(string,size,value)     snprintf((string), (size), "%d", (value))
+#define ini_itoa(string,size,value)     snprintf((string), (size), "%d", (value))
 #define ini_ftoa(string,size,value)     snprintf((string), (size), "%f", (value))
 #define ini_atof(string)                strtof((string), NULL)
